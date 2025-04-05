@@ -1,47 +1,48 @@
 # sshesame-pro
 
-<center>[![Release](https://github.com/Windows10555/sshesame-pro/actions/workflows/release.yml/badge.svg)](https://github.com/Windows10555/sshesame-pro/actions/workflows/release.yml)</center>
-Ò»¸ö¼òµ¥Ò×ÓÃµÄ SSH ÃÛ¹Þ£¬Ä£Äâ SSH ·þÎñÆ÷²¢¼ÇÂ¼ËùÓÐ»î¶¯£¨°üÀ¨Í¨µÀºÍÇëÇó£©£¬µ«²»»áÔÚÖ÷»úÉÏÖ´ÐÐÈÎºÎÊµ¼Ê²Ù×÷£¨ÀýÈçÖ´ÐÐÃüÁî»ò·¢ÆðÍøÂçÇëÇó£©¡£
+[![Release](https://github.com/Windows10555/sshesame-pro/actions/workflows/release.yml/badge.svg)](https://github.com/Windows10555/sshesame-pro/actions/workflows/release.yml)
 
-´ËÎª[Ô­°æ sshesame](https://github.com/jaksi/sshesame) µÄÔöÇ¿°æ£¬Íê³ÉÁËÈÕÖ¾Êä³öºÍÄ£ÄâµÄ SSH µÄºº»¯£¬²¢Ìí¼ÓÁË¼¸¸ö¹¥»÷Õß³£ÓÃµÄÖ¸Áî¡£
+ä¸€ä¸ªç®€å•æ˜“ç”¨çš„ SSH èœœç½ï¼Œæ¨¡æ‹Ÿ SSH æœåŠ¡å™¨å¹¶è®°å½•æ‰€æœ‰æ´»åŠ¨ï¼ˆåŒ…æ‹¬é€šé“å’Œè¯·æ±‚ï¼‰ï¼Œä½†ä¸ä¼šåœ¨ä¸»æœºä¸Šæ‰§è¡Œä»»ä½•å®žé™…æ“ä½œï¼ˆä¾‹å¦‚æ‰§è¡Œå‘½ä»¤æˆ–å‘èµ·ç½‘ç»œè¯·æ±‚ï¼‰ã€‚
 
-## °²×°ÓëÊ¹ÓÃ
+æ­¤ä¸º[åŽŸç‰ˆ sshesame](https://github.com/jaksi/sshesame) çš„å¢žå¼ºç‰ˆï¼Œå®Œæˆäº†æ—¥å¿—è¾“å‡ºå’Œæ¨¡æ‹Ÿçš„ SSH çš„æ±‰åŒ–ï¼Œå¹¶æ·»åŠ äº†å‡ ä¸ªæ”»å‡»è€…å¸¸ç”¨çš„æŒ‡ä»¤ã€‚
+
+## å®‰è£…ä¸Žä½¿ç”¨
 > [!WARNING]
-> ¹Ù·½ Debian£¨¼°ÑÜÉú·¢ÐÐ°æ£©²Ö¿âÖÐµÄ [sshesame °ü](https://packages.debian.org/stable/sshesame) ¶Ô[Ô­À´µÄ°æ±¾](https://github.com/jaksi/sshesame)¿ÉÄÜÒÑ¹ýÊ±¡£
-
-> [!WARNING]
-> ±¾ÏîÄ¿ÈÔÔÚºº»¯ÖÐ£¬²¿·Ö½çÃæºÍ¹¦ÄÜÉÐÎ´ÍêÈ«·­Òë¡£´ËÍâ£¬²¿·Ö³£¼û SSH Ö¸ÁîÄ¿Ç°ÉÐ²»Ö§³Ö£¬ºóÐø°æ±¾»áÖð²½ÍêÉÆ¡£
-
-### ´ÓÔ´Âë°²×°
+> å®˜æ–¹ Debianï¼ˆåŠè¡ç”Ÿå‘è¡Œç‰ˆï¼‰ä»“åº“ä¸­çš„ [sshesame åŒ…](https://packages.debian.org/stable/sshesame) å¯¹[åŽŸæ¥çš„ç‰ˆæœ¬](https://github.com/jaksi/sshesame)å¯èƒ½å·²è¿‡æ—¶ã€‚
 
 > [!WARNING]
-> ÆäÖÐµÄÐí¶àÖ¸ÁîµÄÄÚÈÝ½¨ÒéÄã×îºÃÊÖ¶¯ÐÞ¸ÄÒÔ´ïµ½ÄãµÄÒªÇó¡£
-> ÀýÈç`lscpu`£¬ËüÄ¬ÈÏ»áÄ£ÄâÒ»¸ö AMD Athlon(tm) II X4 645 Processor¡£
+> æœ¬é¡¹ç›®ä»åœ¨æ±‰åŒ–ä¸­ï¼Œéƒ¨åˆ†ç•Œé¢å’ŒåŠŸèƒ½å°šæœªå®Œå…¨ç¿»è¯‘ã€‚æ­¤å¤–ï¼Œéƒ¨åˆ†å¸¸è§ SSH æŒ‡ä»¤ç›®å‰å°šä¸æ”¯æŒï¼ŒåŽç»­ç‰ˆæœ¬ä¼šé€æ­¥å®Œå–„ã€‚
+
+### ä»Žæºç å®‰è£…
+
+> [!WARNING]
+> å…¶ä¸­çš„è®¸å¤šæŒ‡ä»¤çš„å†…å®¹å»ºè®®ä½ æœ€å¥½æ‰‹åŠ¨ä¿®æ”¹ä»¥è¾¾åˆ°ä½ çš„è¦æ±‚ã€‚
+> ä¾‹å¦‚`lscpu`ï¼Œå®ƒé»˜è®¤ä¼šæ¨¡æ‹Ÿä¸€ä¸ª AMD Athlon(tm) II X4 645 Processorã€‚
 
 
-ÇëÏÈÊ¹ÓÃÄãµÄ°ü¹ÜÀíÆ÷°²×°golang¡£
+è¯·å…ˆä½¿ç”¨ä½ çš„åŒ…ç®¡ç†å™¨å®‰è£…golangã€‚
 ```Bash
 git clone https://github.com/Windows10555/sshesame-pro.git
 
-# Èç¹ûÄãÔÚÖÐ¹úÄÚÍøÂç²»ºÃ£º
+# å¦‚æžœä½ åœ¨ä¸­å›½å†…ç½‘ç»œä¸å¥½ï¼š
 git clone https://githubfast.com/Windows10555/sshesame-pro.git
 
 cd sshesame-pro
 go build
 ```
 
-### Ê¹ÓÃÔ¤±àÒë¶þ½øÖÆÎÄ¼þ
+### ä½¿ç”¨é¢„ç¼–è¯‘äºŒè¿›åˆ¶æ–‡ä»¶
 
-ÔÚ[Releases](releases)ÓÐ×Ô¶¯±àÒëµÄ°æ±¾¡£
+åœ¨[Releases](releases)æœ‰è‡ªåŠ¨ç¼–è¯‘çš„ç‰ˆæœ¬ã€‚
 
-## Ê¹ÓÃ·½·¨
+## ä½¿ç”¨æ–¹æ³•
 
-- `-config string`£º¿ÉÑ¡µÄÅäÖÃÎÄ¼þÂ·¾¶£¬Èç²»Ìí¼Ó£¬½«Ê¹ÓÃÄÚÖÃÅäÖÃ¡£
-- `-data_dir string`£º´æ´¢×Ô¶¯Éú³ÉµÄÖ÷»úÃÜÔ¿µÄÄ¿Â¼£¨ÔÚ Linux ÉÏÄ¬ÈÏÖµÎª `$HOME/.local/share/sshesame`£©
+- `-config string`ï¼šå¯é€‰çš„é…ç½®æ–‡ä»¶è·¯å¾„ï¼Œå¦‚ä¸æ·»åŠ ï¼Œå°†ä½¿ç”¨å†…ç½®é…ç½®ã€‚
+- `-data_dir string`ï¼šå­˜å‚¨è‡ªåŠ¨ç”Ÿæˆçš„ä¸»æœºå¯†é’¥çš„ç›®å½•ï¼ˆåœ¨ Linux ä¸Šé»˜è®¤å€¼ä¸º `$HOME/.local/share/sshesame`ï¼‰
 
-µ÷ÊÔºÍ´íÎóÈÕÖ¾»áÊä³öµ½±ê×¼´íÎó¡£»î¶¯ÈÕÖ¾Ä¬ÈÏÊä³öµ½±ê×¼Êä³ö£¬³ý·ÇÉèÖÃÁË `logging.file` ÅäÖÃÑ¡Ïî¡£
+è°ƒè¯•å’Œé”™è¯¯æ—¥å¿—ä¼šè¾“å‡ºåˆ°æ ‡å‡†é”™è¯¯ã€‚æ´»åŠ¨æ—¥å¿—é»˜è®¤è¾“å‡ºåˆ°æ ‡å‡†è¾“å‡ºï¼Œé™¤éžè®¾ç½®äº† `logging.file` é…ç½®é€‰é¡¹ã€‚
 
-### systemd ÅäÖÃ
+### systemd é…ç½®
 
 ```desktop
 [Unit]
@@ -57,25 +58,25 @@ Restart=always
 WantedBy=multi-user.target
 ```
 
-### ÅäÖÃÎÄ¼þ
-¿ÉÒÔÍ¨¹ý `-config` ²ÎÊý´«µÝÒ»¸ö¿ÉÑ¡µÄÅäÖÃÎÄ¼þ¡£Èç¹û²»Ö¸¶¨ÅäÖÃÎÄ¼þ£¬³ÌÐò»áÊ¹ÓÃºÏÀíµÄÄ¬ÈÏÖµ£¬²¢ÔÚ `-data_dir` Ö¸¶¨µÄÄ¿Â¼ÖÐÉú³É RSA¡¢ECDSA ºÍ Ed25519 Ö÷»úÃÜÔ¿¡£
-ÏîÄ¿°üº¬Ò»¸ö[Ê¾ÀýÅäÖÃÎÄ¼þ](sshesame.yaml)£¬ÆäÖÐ°üº¬ËùÓÐÅäÖÃÑ¡ÏîµÄÄ¬ÈÏÖµºÍËµÃ÷¡£´ËÍâ»¹ÓÐÒ»¸ö[×îÐ¡»¯ÅäÖÃÎÄ¼þ](openssh.yaml)£¬ÓÃÓÚÄ£·Â OpenSSH ·þÎñÆ÷µÄÐÐÎª¡£
+### é…ç½®æ–‡ä»¶
+å¯ä»¥é€šè¿‡ `-config` å‚æ•°ä¼ é€’ä¸€ä¸ªå¯é€‰çš„é…ç½®æ–‡ä»¶ã€‚å¦‚æžœä¸æŒ‡å®šé…ç½®æ–‡ä»¶ï¼Œç¨‹åºä¼šä½¿ç”¨åˆç†çš„é»˜è®¤å€¼ï¼Œå¹¶åœ¨ `-data_dir` æŒ‡å®šçš„ç›®å½•ä¸­ç”Ÿæˆ RSAã€ECDSA å’Œ Ed25519 ä¸»æœºå¯†é’¥ã€‚
+é¡¹ç›®åŒ…å«ä¸€ä¸ª[ç¤ºä¾‹é…ç½®æ–‡ä»¶](sshesame.yaml)ï¼Œå…¶ä¸­åŒ…å«æ‰€æœ‰é…ç½®é€‰é¡¹çš„é»˜è®¤å€¼å’Œè¯´æ˜Žã€‚æ­¤å¤–è¿˜æœ‰ä¸€ä¸ª[æœ€å°åŒ–é…ç½®æ–‡ä»¶](openssh.yaml)ï¼Œç”¨äºŽæ¨¡ä»¿ OpenSSH æœåŠ¡å™¨çš„è¡Œä¸ºã€‚
 
-## Ê¾ÀýÊä³ö
+## ç¤ºä¾‹è¾“å‡º
 ```
-2025/04/05 18:28:23 [83.40.226.213:43212] ÒÔÓÃ»§Ãû "root" ¸½´øÃÜÂë "zaq123456" µÇÂ¼ ÒÑ¾Ü¾ø
-2025/04/05 18:28:59 [91.92.199.36:37660] ÒÔÓÃ»§Ãû "slave" ¸½´øÃÜÂë "slave" µÇÂ¼ ÒÑ¾Ü¾ø
-2025/04/05 18:29:03 [103.134.154.72:52162] ÒÔÓÃ»§Ãû "botuser" ¸½´øÃÜÂë "12345" µÇÂ¼ ÒÑ¾Ü¾ø
-2025/04/05 18:29:24 [101.36.119.98:41244] ÒÔÓÃ»§Ãû "cheeki" ¸½´øÃÜÂë "M3gaP33!" µÇÂ¼ ÒÑ¾Ü¾ø
-2025/04/05 18:29:52 [83.40.226.213:44748] ÒÔÓÃ»§Ãû "slave" ¸½´øÃÜÂë "slave" µÇÂ¼ ÒÑ¾Ü¾ø
-2025/04/05 18:30:10 [91.92.199.36:55420] ÒÔÓÃ»§Ãû "root" ¸½´øÃÜÂë "jerry" µÇÂ¼ ÒÑ¾Ü¾ø
-2025/04/05 18:30:23 [103.134.154.72:51514] ÒÔÓÃ»§Ãû "root" ¸½´øÃÜÂë "123456@" µÇÂ¼ ÒÑ¾Ü¾ø
-2025/04/05 18:30:51 [101.36.119.98:35660] ÒÔÓÃ»§Ãû "kodi" ¸½´øÃÜÂë "12345678" µÇÂ¼ ÒÑ¾Ü¾ø
-2025/04/05 18:31:11 [83.40.226.213:56790] ÒÔÓÃ»§Ãû "admin" ¸½´øÃÜÂë "admin" µÇÂ¼ ÒÑ¾Ü¾ø
-2025/04/05 18:31:21 [91.92.199.36:56656] ÒÔÓÃ»§Ãû "clouduser" ¸½´øÃÜÂë "12345" µÇÂ¼ ÒÑ¾Ü¾ø
-2025/04/05 18:31:45 [103.134.154.72:54794] ÒÔÓÃ»§Ãû "root" ¸½´øÃÜÂë "LeitboGi0ro" µÇÂ¼ ÒÑ¾Ü¾ø
+2025/04/05 18:28:23 [83.40.226.213:43212] ä»¥ç”¨æˆ·å "root" é™„å¸¦å¯†ç  "zaq123456" ç™»å½• å·²æ‹’ç»
+2025/04/05 18:28:59 [91.92.199.36:37660] ä»¥ç”¨æˆ·å "slave" é™„å¸¦å¯†ç  "slave" ç™»å½• å·²æ‹’ç»
+2025/04/05 18:29:03 [103.134.154.72:52162] ä»¥ç”¨æˆ·å "botuser" é™„å¸¦å¯†ç  "12345" ç™»å½• å·²æ‹’ç»
+2025/04/05 18:29:24 [101.36.119.98:41244] ä»¥ç”¨æˆ·å "cheeki" é™„å¸¦å¯†ç  "M3gaP33!" ç™»å½• å·²æ‹’ç»
+2025/04/05 18:29:52 [83.40.226.213:44748] ä»¥ç”¨æˆ·å "slave" é™„å¸¦å¯†ç  "slave" ç™»å½• å·²æ‹’ç»
+2025/04/05 18:30:10 [91.92.199.36:55420] ä»¥ç”¨æˆ·å "root" é™„å¸¦å¯†ç  "jerry" ç™»å½• å·²æ‹’ç»
+2025/04/05 18:30:23 [103.134.154.72:51514] ä»¥ç”¨æˆ·å "root" é™„å¸¦å¯†ç  "123456@" ç™»å½• å·²æ‹’ç»
+2025/04/05 18:30:51 [101.36.119.98:35660] ä»¥ç”¨æˆ·å "kodi" é™„å¸¦å¯†ç  "12345678" ç™»å½• å·²æ‹’ç»
+2025/04/05 18:31:11 [83.40.226.213:56790] ä»¥ç”¨æˆ·å "admin" é™„å¸¦å¯†ç  "admin" ç™»å½• å·²æ‹’ç»
+2025/04/05 18:31:21 [91.92.199.36:56656] ä»¥ç”¨æˆ·å "clouduser" é™„å¸¦å¯†ç  "12345" ç™»å½• å·²æ‹’ç»
+2025/04/05 18:31:45 [103.134.154.72:54794] ä»¥ç”¨æˆ·å "root" é™„å¸¦å¯†ç  "LeitboGi0ro" ç™»å½• å·²æ‹’ç»
 ```
 
-~~ÕâÒ²ÊÇ¹«¿ª´¦ÐÌ¹¥»÷Õß£¡~~
+~~è¿™ä¹Ÿæ˜¯å…¬å¼€å¤„åˆ‘æ”»å‡»è€…ï¼~~
 
 
