@@ -1,5 +1,6 @@
 # sshesame-pro
 
+<center>[![Release](https://github.com/Windows10555/sshesame-pro/actions/workflows/release.yml/badge.svg)](https://github.com/Windows10555/sshesame-pro/actions/workflows/release.yml)</center>
 一个简单易用的 SSH 蜜罐，模拟 SSH 服务器并记录所有活动（包括通道和请求），但不会在主机上执行任何实际操作（例如执行命令或发起网络请求）。
 
 此为[原版 sshesame](https://github.com/jaksi/sshesame) 的增强版，完成了日志输出和模拟的 SSH 的汉化，并添加了几个攻击者常用的指令。
@@ -31,7 +32,7 @@ go build
 
 ### 使用预编译二进制文件
 
-有时间再说吧。
+在[Releases](releases)有自动编译的版本。
 
 ## 使用方法
 

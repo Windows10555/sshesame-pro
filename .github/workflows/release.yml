@@ -3,6 +3,7 @@ on:
   push:
     tags:
       - v*
+
 jobs:
   release-binaries:
     name: Release binaries
@@ -12,47 +13,59 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version: "^1.22"
-      - run: go build -o sshesame-linux-amd64
-        env:
-          GOOS: linux
-          GOARCH: amd64
-      - run: go build -o sshesame-linux-armv6
-        env:
-          GOOS: linux
-          GOARCH: arm
-          GOARM: 6
-      - run: go build -o sshesame-linux-armv7
-        env:
-          GOOS: linux
-          GOARCH: arm
-          GOARM: 7
-      - run: go build -o sshesame-linux-arm64
-        env:
-          GOOS: linux
-          GOARCH: arm64
-      - run: go build -o sshesame-macos-amd64
-        env:
-          GOOS: darwin
-          GOARCH: amd64
-      - run: go build -o sshesame-macos-arm64
-        env:
-          GOOS: darwin
-          GOARCH: arm64
-      - run: go build -o sshesame-windows-amd64.exe
-        env:
-          GOOS: windows
-          GOARCH: amd64
-      - run: go build -o sshesame-windows-armv7.exe
-        env:
-          GOOS: windows
-          GOARCH: arm
-          GOARM: 7
-      - run: go build -o sshesame-windows-arm64.exe
-        env:
-          GOOS: windows
-          GOARCH: arm64
-      - uses: softprops/action-gh-release@v1
+      - name: Read version from main.go
+        id: get-version
+        run: |
+          VERSION=$(grep 'var version = ' main.go | cut -d '"' -f2)
+          echo "Version: $VERSION"
+          echo "::set-output name=version::$VERSION"
+      - name: Build binaries
+        run: |
+          go build -o sshesame-linux-amd64
+          env:
+            GOOS: linux
+            GOARCH: amd64
+      - name: Build for other platforms
+        run: |
+          go build -o sshesame-linux-armv6
+          env:
+            GOOS: linux
+            GOARCH: arm
+            GOARM: 6
+          go build -o sshesame-linux-armv7
+          env:
+            GOOS: linux
+            GOARCH: arm
+            GOARM: 7
+          go build -o sshesame-linux-arm64
+          env:
+            GOOS: linux
+            GOARCH: arm64
+          go build -o sshesame-macos-amd64
+          env:
+            GOOS: darwin
+            GOARCH: amd64
+          go build -o sshesame-macos-arm64
+          env:
+            GOOS: darwin
+            GOARCH: arm64
+          go build -o sshesame-windows-amd64.exe
+          env:
+            GOOS: windows
+            GOARCH: amd64
+          go build -o sshesame-windows-armv7.exe
+          env:
+            GOOS: windows
+            GOARCH: arm
+            GOARM: 7
+          go build -o sshesame-windows-arm64.exe
+          env:
+            GOOS: windows
+            GOARCH: arm64
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
         with:
+          name: "sshesame-pro v${{ steps.get-version.outputs.version }}"
           files: |
             sshesame-linux-amd64
             sshesame-linux-armv6
@@ -63,33 +76,3 @@ jobs:
             sshesame-windows-amd64.exe
             sshesame-windows-armv7.exe
             sshesame-windows-arm64.exe
-            sshesame.yaml
-  release-docker-images:
-    env:
-      REGISTRY: ghcr.io
-      IMAGE_NAME: ${{ github.repository }}
-    name: Release Docker images
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-    steps:
-      - uses: actions/checkout@v3
-      - uses: docker/setup-qemu-action@v1
-      - uses: docker/setup-buildx-action@v1
-      - uses: docker/login-action@v1
-        with:
-          registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-      - id: meta
-        uses: docker/metadata-action@v3
-        with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-      - uses: docker/build-push-action@v2
-        with:
-          context: .
-          platforms: linux/amd64,linux/arm64,linux/arm/v7
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}

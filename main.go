@@ -14,6 +14,7 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
+var version = "0.0.1"
 var (
 	infoLogger    *log.Logger
 	warningLogger *log.Logger
