@@ -84,7 +84,7 @@ func (cfg *config) setDefaults() {
 	cfg.Auth.PasswordAuth.Enabled = true
 	cfg.Auth.PasswordAuth.Accepted = true
 	cfg.Auth.PublicKeyAuth.Enabled = true
-	cfg.SSHProto.Version = "SSH-2.0-sshesame"
+	cfg.SSHProto.Version = "SSH-2.0-sshesame-pro"
 	cfg.SSHProto.Banner = "This is an SSH honeypot. Everything is logged and monitored."
 }
 
@@ -256,7 +256,7 @@ func (cfg *config) load(configString string, dataDir string) error {
 	}
 
 	if len(cfg.Server.HostKeys) == 0 {
-		infoLogger.Printf("No host keys configured, using keys at %q", dataDir)
+		infoLogger.Printf("默认主机公钥未设定，使用 %q 的公钥", dataDir)
 		if err := cfg.setDefaultHostKeys(dataDir, []keySignature{rsa_key, ecdsa_key, ed25519_key}); err != nil {
 			return err
 		}
