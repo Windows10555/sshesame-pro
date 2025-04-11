@@ -39,14 +39,14 @@ type authAccepted bool
 
 func (accepted authAccepted) String() string {
 	if accepted {
-		return "accepted"
+		return "已允许"
 	}
-	return "rejected"
+	return "已拒绝"
 }
 
 type authLog struct {
-	User     string       `json:"user"`
-	Accepted authAccepted `json:"accepted"`
+	User     string       `json:"accepted"`
+	Accepted authAccepted `json:"rejected"`
 }
 
 type noAuthLog struct {
@@ -54,7 +54,7 @@ type noAuthLog struct {
 }
 
 func (entry noAuthLog) String() string {
-	return fmt.Sprintf("authentication for user %q without credentials %v", entry.User, entry.Accepted)
+	return fmt.Sprintf("以用户名 %q 不使用验证登录 %v", entry.User, entry.Accepted)
 }
 func (entry noAuthLog) eventType() string {
 	return "no_auth"
@@ -66,7 +66,7 @@ type passwordAuthLog struct {
 }
 
 func (entry passwordAuthLog) String() string {
-	return fmt.Sprintf("authentication for user %q with password %q %v", entry.User, entry.Password, entry.Accepted)
+	return fmt.Sprintf("以用户名 %q 附带密码 %q 登录 %v", entry.User, entry.Password, entry.Accepted)
 }
 func (entry passwordAuthLog) eventType() string {
 	return "password_auth"
@@ -78,7 +78,7 @@ type publicKeyAuthLog struct {
 }
 
 func (entry publicKeyAuthLog) String() string {
-	return fmt.Sprintf("authentication for user %q with public key %q %v", entry.User, entry.PublicKeyFingerprint, entry.Accepted)
+	return fmt.Sprintf("以用户名 %q 带公钥 %q 登录 %v", entry.User, entry.PublicKeyFingerprint, entry.Accepted)
 }
 func (entry publicKeyAuthLog) eventType() string {
 	return "public_key_auth"
@@ -90,7 +90,7 @@ type keyboardInteractiveAuthLog struct {
 }
 
 func (entry keyboardInteractiveAuthLog) String() string {
-	return fmt.Sprintf("authentication for user %q with keyboard interactive answers %q %v", entry.User, entry.Answers, entry.Accepted)
+	return fmt.Sprintf("以用户名 %q with 使用输入验证的内容 %q 登录 %v", entry.User, entry.Answers, entry.Accepted)
 }
 func (entry keyboardInteractiveAuthLog) eventType() string {
 	return "keyboard_interactive_auth"
@@ -101,7 +101,7 @@ type connectionLog struct {
 }
 
 func (entry connectionLog) String() string {
-	return fmt.Sprintf("connection with client version %q established", entry.ClientVersion)
+	return fmt.Sprintf("与客户端 %q 已连接", entry.ClientVersion)
 }
 func (entry connectionLog) eventType() string {
 	return "connection"
@@ -111,7 +111,7 @@ type connectionCloseLog struct {
 }
 
 func (entry connectionCloseLog) String() string {
-	return "connection closed"
+	return "连接被关闭"
 }
 func (entry connectionCloseLog) eventType() string {
 	return "connection_close"
@@ -122,7 +122,7 @@ type tcpipForwardLog struct {
 }
 
 func (entry tcpipForwardLog) String() string {
-	return fmt.Sprintf("TCP/IP forwarding on %v requested", entry.Address)
+	return fmt.Sprintf("请求在 %v 上进行 TCP/IP 转发", entry.Address)
 }
 func (entry tcpipForwardLog) eventType() string {
 	return "tcpip_forward"
@@ -133,7 +133,7 @@ type cancelTCPIPForwardLog struct {
 }
 
 func (entry cancelTCPIPForwardLog) String() string {
-	return fmt.Sprintf("TCP/IP forwarding on %v canceled", entry.Address)
+	return fmt.Sprintf("在 %v 上的 TCP/IP 转发已取消", entry.Address)
 }
 func (entry cancelTCPIPForwardLog) eventType() string {
 	return "cancel_tcpip_forward"
@@ -143,7 +143,7 @@ type noMoreSessionsLog struct {
 }
 
 func (entry noMoreSessionsLog) String() string {
-	return "rejection of further session channels requested"
+	return "请求拒绝进一步的会话通道"
 }
 func (entry noMoreSessionsLog) eventType() string {
 	return "no_more_sessions"
@@ -158,7 +158,7 @@ func (entry hostKeysProveLog) String() string {
 	for i, hostKeyFile := range entry.HostKeyFiles {
 		baseNames[i] = fmt.Sprintf("%q", filepath.Base(hostKeyFile))
 	}
-	return fmt.Sprintf("proof of ownership of host keys %v requested", strings.Join(baseNames, ", "))
+	return fmt.Sprintf("请求主机密钥 %v 的所有权证明", strings.Join(baseNames, ", "))
 }
 func (entry hostKeysProveLog) eventType() string {
 	return "host_keys_prove"
@@ -173,7 +173,7 @@ type sessionLog struct {
 }
 
 func (entry sessionLog) String() string {
-	return fmt.Sprintf("[channel %v] session requested", entry.ChannelID)
+	return fmt.Sprintf("[通道 %v] 请求会话", entry.ChannelID)
 }
 func (entry sessionLog) eventType() string {
 	return "session"
@@ -184,7 +184,7 @@ type sessionCloseLog struct {
 }
 
 func (entry sessionCloseLog) String() string {
-	return fmt.Sprintf("[channel %v] closed", entry.ChannelID)
+	return fmt.Sprintf("[通道 %v] 已关闭", entry.ChannelID)
 }
 func (entry sessionCloseLog) eventType() string {
 	return "session_close"
@@ -196,7 +196,7 @@ type sessionInputLog struct {
 }
 
 func (entry sessionInputLog) String() string {
-	return fmt.Sprintf("[channel %v] input: %q", entry.ChannelID, entry.Input)
+	return fmt.Sprintf("[通道 %v] 输入：%q", entry.ChannelID, entry.Input)
 }
 func (entry sessionInputLog) eventType() string {
 	return "session_input"
@@ -209,7 +209,7 @@ type directTCPIPLog struct {
 }
 
 func (entry directTCPIPLog) String() string {
-	return fmt.Sprintf("[channel %v] direct TCP/IP forwarding from %v to %v requested", entry.ChannelID, entry.From, entry.To)
+	return fmt.Sprintf("[通道 %v] 请求从 %v 到 %v 的直接 TCP/IP 转发", entry.ChannelID, entry.From, entry.To)
 }
 func (entry directTCPIPLog) eventType() string {
 	return "direct_tcpip"
@@ -220,7 +220,7 @@ type directTCPIPCloseLog struct {
 }
 
 func (entry directTCPIPCloseLog) String() string {
-	return fmt.Sprintf("[channel %v] closed", entry.ChannelID)
+	return fmt.Sprintf("[通道 %v] （直接 TCP/IP） 已关闭", entry.ChannelID)
 }
 func (entry directTCPIPCloseLog) eventType() string {
 	return "direct_tcpip_close"
@@ -232,7 +232,7 @@ type directTCPIPInputLog struct {
 }
 
 func (entry directTCPIPInputLog) String() string {
-	return fmt.Sprintf("[channel %v] input: %q", entry.ChannelID, entry.Input)
+	return fmt.Sprintf("[通道 %v] 输入（直接 TCP/IP）：%q", entry.ChannelID, entry.Input)
 }
 func (entry directTCPIPInputLog) eventType() string {
 	return "direct_tcpip_input"
@@ -246,7 +246,7 @@ type ptyLog struct {
 }
 
 func (entry ptyLog) String() string {
-	return fmt.Sprintf("[channel %v] PTY using terminal %q (size %vx%v) requested", entry.ChannelID, entry.Terminal, entry.Width, entry.Height)
+	return fmt.Sprintf("[通道 %v] 请求使用终端 %q (尺寸 %vx%v) 的 PTY", entry.ChannelID, entry.Terminal, entry.Width, entry.Height)
 }
 func (entry ptyLog) eventType() string {
 	return "pty"
@@ -257,7 +257,7 @@ type shellLog struct {
 }
 
 func (entry shellLog) String() string {
-	return fmt.Sprintf("[channel %v] shell requested", entry.ChannelID)
+	return fmt.Sprintf("[通道 %v] 请求 Shell", entry.ChannelID)
 }
 func (entry shellLog) eventType() string {
 	return "shell"
@@ -269,7 +269,7 @@ type execLog struct {
 }
 
 func (entry execLog) String() string {
-	return fmt.Sprintf("[channel %v] command %q requested", entry.ChannelID, entry.Command)
+	return fmt.Sprintf("[通道 %v] 请求命令 %q", entry.ChannelID, entry.Command)
 }
 func (entry execLog) eventType() string {
 	return "exec"
@@ -281,7 +281,7 @@ type subsystemLog struct {
 }
 
 func (entry subsystemLog) String() string {
-	return fmt.Sprintf("[channel %v] subsystem %q requested", entry.ChannelID, entry.Subsystem)
+	return fmt.Sprintf("[通道 %v] 请求子系统 %q", entry.ChannelID, entry.Subsystem)
 }
 func (entry subsystemLog) eventType() string {
 	return "subsystem"
@@ -293,7 +293,7 @@ type x11Log struct {
 }
 
 func (entry x11Log) String() string {
-	return fmt.Sprintf("[channel %v] X11 forwarding on screen %v requested", entry.ChannelID, entry.Screen)
+	return fmt.Sprintf("[通道 %v] 请求屏幕 %v 上的 X11 转发", entry.ChannelID, entry.Screen)
 }
 func (entry x11Log) eventType() string {
 	return "x11"
@@ -306,7 +306,7 @@ type envLog struct {
 }
 
 func (entry envLog) String() string {
-	return fmt.Sprintf("[channel %v] environment variable %q with value %q requested", entry.ChannelID, entry.Name, entry.Value)
+	return fmt.Sprintf("[通道 %v] 请求环境变量 %q，其值为 %q", entry.ChannelID, entry.Name, entry.Value)
 }
 func (entry envLog) eventType() string {
 	return "env"
@@ -319,7 +319,7 @@ type windowChangeLog struct {
 }
 
 func (entry windowChangeLog) String() string {
-	return fmt.Sprintf("[channel %v] window size change to %vx%v requested", entry.ChannelID, entry.Width, entry.Height)
+	return fmt.Sprintf("[通道 %v] 请求窗口尺寸更改为 %vx%v", entry.ChannelID, entry.Width, entry.Height)
 }
 func (entry windowChangeLog) eventType() string {
 	return "window_change"
@@ -334,7 +334,7 @@ type debugGlobalRequestLog struct {
 func (entry debugGlobalRequestLog) String() string {
 	jsonBytes, err := json.Marshal(entry)
 	if err != nil {
-		warningLogger.Printf("Failed to log event: %v", err)
+		warningLogger.Printf("调试日志记录器：记录事件失败：%v", err)
 		return ""
 	}
 	return fmt.Sprintf("DEBUG global request received: %v\n", string(jsonBytes))
@@ -352,10 +352,10 @@ type debugChannelLog struct {
 func (entry debugChannelLog) String() string {
 	jsonBytes, err := json.Marshal(entry)
 	if err != nil {
-		warningLogger.Printf("Failed to log event: %v", err)
+		warningLogger.Printf("调试日志记录器：记录事件失败：%v", err)
 		return ""
 	}
-	return fmt.Sprintf("DEBUG new channel requested: %v\n", string(jsonBytes))
+	return fmt.Sprintf("调试：请求新的通道：%v\n", string(jsonBytes))
 }
 func (entry debugChannelLog) eventType() string {
 	return "debug_channel"
@@ -374,7 +374,7 @@ func (entry debugChannelRequestLog) String() string {
 		warningLogger.Printf("Failed to log event: %v", err)
 		return ""
 	}
-	return fmt.Sprintf("DEBUG channel request received: %v\n", string(jsonBytes))
+	return fmt.Sprintf("调试：接收到通道请求：%v\n", string(jsonBytes))
 }
 func (entry debugChannelRequestLog) eventType() string {
 	return "debug_channel_request"
@@ -404,7 +404,7 @@ func (context connContext) logEvent(entry logEntry) {
 		}
 		logBytes, err := json.Marshal(jsonEntry)
 		if err != nil {
-			warningLogger.Printf("Failed to log event: %v", err)
+			warningLogger.Printf("记录事件失败：%v", err)
 			return
 		}
 		log.Print(string(logBytes))

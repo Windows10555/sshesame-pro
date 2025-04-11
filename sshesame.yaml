@@ -1,13 +1,14 @@
 server:
+  # 默认监听地址。如果是对外，那就 0.0.0.0 。
   listen_address: 127.0.0.1:2022
 
-  # Host private key files.
-  # If unspecified, null or empty, an RSA, ECDSA and Ed25519 key will be generated and stored.
+  # 主机私钥文件的位置。
+  # 如果未指定、为 null 或为空，将生成并存储 RSA 、 ECDSA 和 Ed25519 密钥。
   host_keys: null
 
-  # Fake internal services for handling direct-tcpip channels (`ssh -L`).
-  # If unspecified or null, sensible defaults will be used.
-  # If empty, no direct-tcpip channels will be accepted.
+  # 用于处理直接 TCP/IP 通道的虚假内部服务 （'ssh -L'）。
+  # 如果未指定或 null，则将使用合理的默认值。
+  # 如果为空，则不接受任何直接 TCP/IP 通道。
   tcpip_services:
     25: SMTP
     80: HTTP
@@ -16,88 +17,86 @@ server:
     8080: HTTP
 
 logging:
-  # The log file to output activity logs to. Debug and error logs are still written to standard error.
-  # If unspecified or null, activity logs are written to standard out.
-  file: null
-
-  # Make activity logs JSON-formatted instead of human readable.
+  # 要将活动日志输出到的日志文件。调试和错误日志仍然写入标准错误。
+  # 如果未指定或为 null ，则活动日志将写入标准输出。
+  # 将活动日志格式化为 JSON，而不是人类友好可读。
   json: false
 
-  # Include timestamps in the logs.
+  # 在日志中包含时间戳。
   timestamps: true
 
-  # Log full raw details of all global requests, channels and channel requests.
+  # 记录所有全局请求、通道和通道请求的完整原始详细信息。
   debug: false
 
-  # Address to export and serve prometheus metrics on.
-  # If unspecified or null, metrics are not served.
+  # 用于导出和提供 Prometheus 指标的地址。
+  # 如果未指定或为 null，则不会提供指标。
   metrics_address: null
-
-  # When logging in JSON, log addresses as objects including the hostname and the port instead of strings.
+  
+  # 在 JSON 中登录时，将地址记录为对象，包括主机名和端口，而不是字符串。
   split_host_port: false
 
 auth:
-  # Allow clients to connect without authenticating.
+  # 允许客户端在不进行身份验证的情况下进行连接。
   no_auth: false
 
-  # The maximum number of authentication attempts permitted per connection.
-  # If set to a negative number, the number of attempts are unlimited.
-  # If unspecified, null or zero, a sensible default is used.
+  # 每个连接允许的最大身份验证尝试次数。
+  # 如果设置为负数，则尝试次数不受限制。
+  # 如果未指定，则为 null 或 0，则使用合理的默认值。
   max_tries: 0
 
   password_auth:
-    # Offer password authentication as an authentication option.
+    # 提供密码身份验证作为身份验证选项。
     enabled: true
 
-    # Accept all passwords.
+    # 接受所有密码（即输入任何密码都可以登入）。
     accepted: true
 
   public_key_auth:
-    # Offer public key authentication as an authentication option.
+    # 提供公钥身份验证作为身份验证选项。
     enabled: true
 
-    # Accept all public keys.
+    # 接受所有公钥（即任何公钥都可以登入）。
     accepted: false
 
   keyboard_interactive_auth:
-    # Offer keyboard interactive authentication as an authentication option.
+    # 提供键盘交互式身份验证作为身份验证选项。
     enabled: false
 
-    # Accept all keyboard interactive answers.
+    # 接受所有键盘交互式答案（即输入任何内容都可以登录）。
     accepted: false
 
-    # Instruction for the keyboard interactive authentication.
+    # 键盘交互式身份验证说明。
     instruction: Answer these weird questions to log in!
 
     questions:
-      - text: "User: " # Keyboard interactive authentication question text.
-        echo: true # Enable echoing the answer.
+      - text: "User: " # 键盘交互式身份验证问题文本。
+        echo: true # 启用回显答案。
       - text: "Password: "
         echo: false
 
 ssh_proto:
-  # The version identification string to announce in the public handshake.
-  # If unspecified or null, a reasonable default is used.
-  # Note that RFC 4253 section 4.2 requires that this string start with "SSH-2.0-".
-  version: SSH-2.0-sshesame
+  # 在公开握手中宣布的版本识别字符串。
+  # 如果未指定或为空，则使用合理的默认值。
+  # 请注意，RFC 4253 第 4.2 节要求此字符串以 "SSH-2.0-" 开头。
+  version: SSH-2.0-sshesame-pro
 
-  # Sent to the client after key exchange completed but before authentication.
-  # If unspecified or null, a reasonable default is used.
-  # If empty, no banner is sent.
+  # 在密钥交换完成后但在身份验证之前发送到客户端。
+  # 如果未指定或为 null，则使用合理的默认值。
+  # 如果为空，则不发送横幅。
   banner: This is an SSH honeypot. Everything is logged and monitored.
 
-  # The maximum number of bytes sent or received after which a new key is negotiated. It must be at least 256.
-  # If unspecified, null or 0, a size suitable for the chosen cipher is used.
+  # 发送或接收的最大字节数，在此之后协商新密钥。它必须至少为 256。
+  # 如果未指定，则为 null 或 0，则使用适合所选密码的大小。
   rekey_threshold: 0
 
-  # The allowed key exchanges algorithms.
-  # If unspecified or null, a default set of algorithms is used.
+  # 允许的密钥交换算法。
+  # 如果未指定或 null，则使用一组默认算法。
   key_exchanges: null
 
-  # The allowed cipher algorithms.
-  # If unspecified or null, a sensible default is used.
+  # 允许的密码算法。
+  # 如果未指定或 null，则使用合理的默认值。
   ciphers: null
 
-  # The allowed MAC algorithms.
-  # If unspecified or null, a sensible default is used.
+  # 允许的 MAC 算法。
+  # 如果未指定或为 null，则使用合理的默认值。
   macs: null

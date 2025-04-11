@@ -55,8 +55,8 @@ func handleDirectTCPIPChannel(newChannel ssh.NewChannel, context channelContext)
 	server := servers[service]
 	if server == nil {
 		tcpipChannelsMetric.WithLabelValues("unknown").Inc()
-		warningLogger.Printf("Unsupported port %v", channelData.Port)
-		return newChannel.Reject(ssh.ConnectionFailed, "Connection refused")
+		warningLogger.Printf("不支持的端口 %v", channelData.Port)
+		return newChannel.Reject(ssh.ConnectionFailed, "连接被拒绝")
 	}
 	tcpipChannelsMetric.WithLabelValues(service).Inc()
 	activeTCPIPChannelsMetric.WithLabelValues(service).Inc()
@@ -83,11 +83,11 @@ func handleDirectTCPIPChannel(newChannel ssh.NewChannel, context channelContext)
 		defer close(inputChan)
 		server.serve(channel, inputChan)
 		if err := channel.CloseWrite(); err != nil {
-			warningLogger.Printf("Error sending EOF to channel: %v", err)
+			warningLogger.Printf("向频道发送 EOF 时出错:%v", err)
 			return
 		}
 		if err := channel.Close(); err != nil {
-			warningLogger.Printf("Error closing channel: %v", err)
+			warningLogger.Printf("关闭频道时出错:%v", err)
 			return
 		}
 	}()
@@ -117,7 +117,7 @@ func handleDirectTCPIPChannel(newChannel ssh.NewChannel, context channelContext)
 				WantReply:   request.WantReply,
 				Payload:     string(request.Payload),
 			})
-			warningLogger.Printf("Unsupported direct-tcpip request type %v", request.Type)
+			warningLogger.Printf("不支持的直接 TCPIP 请求类型 %v", request.Type)
 			if request.WantReply {
 				if err := request.Reply(false, nil); err != nil {
 					return err
@@ -136,13 +136,13 @@ func (server httpServer) serve(readWriter io.ReadWriter, input chan<- string) {
 		request, err := http.ReadRequest(bufio.NewReader(readWriter))
 		if err != nil {
 			if err != io.EOF {
-				warningLogger.Printf("Error reading request: %v", err)
+				warningLogger.Printf("读取请求时出错:%v", err)
 			}
 			return
 		}
 		requestBytes, err := httputil.DumpRequest(request, true)
 		if err != nil {
-			warningLogger.Printf("Error dumping request: %v", err)
+			warningLogger.Printf("转储请求时出错:%v", err)
 			return
 		}
 		input <- string(requestBytes)
@@ -153,12 +153,12 @@ func (server httpServer) serve(readWriter io.ReadWriter, input chan<- string) {
 		}
 		responseBytes, err := httputil.DumpResponse(response, true)
 		if err != nil {
-			warningLogger.Printf("Error dumping response: %v", err)
+			warningLogger.Printf("转储请求时出错:%v", err)
 			return
 		}
 		_, err = readWriter.Write(responseBytes)
 		if err != nil {
-			warningLogger.Printf("Error writing response: %v", err)
+			warningLogger.Printf("写请求时出错:%v", err)
 			return
 		}
 	}

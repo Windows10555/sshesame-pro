@@ -409,7 +409,7 @@ func (cmdCd) execute(context commandContext) (uint32, error) {
 // --- Wpm 命令实现 (Fake Package Manager) ---
 type cmdWpm struct{}
 
-const wpmUpstream = "https://windos.pro/" // Define the fake upstream URL
+const wpmUpstream = "https://mirrors.tuna.tsinghua.edu.cn/debian" // Define the fake upstream URL
 
 func (cmdWpm) execute(context commandContext) (uint32, error) {
 	if len(context.args) < 2 {
